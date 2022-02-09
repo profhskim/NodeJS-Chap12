@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser')
 const session = require('express-session')
 const nunjucks = require('nunjucks')
 const dotenv = require('dotenv')
-const ColorHash = require('color-hash')
+const ColorHash = require('color-hash').default
 
 dotenv.config()
 const webSocket = require('./socket')
@@ -34,6 +34,7 @@ const sessionMiddleware = session({
 
 app.use(morgan('dev'))
 app.use(express.static(path.join(__dirname,'public')))
+app.use('/gif',express.static(path.join(__dirname,'uploads')))
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 app.use(cookieParser(process.env.COOKIE_SECRET))
